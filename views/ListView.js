@@ -1,5 +1,5 @@
 import { html } from 'https://unpkg.com/lighterhtml?module'
-import Component from './Component.js'
+import Component from '../lib/Component.js'
 
 class ListView extends Component {
   constructor (state, emit) {
