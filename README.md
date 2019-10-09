@@ -12,6 +12,7 @@ resulting in them adding extra features (increasing complexity and size).
 This project is a mix of code taken from many of my favorite dependencies to
 create something that's fun to use and small enough to understand.
 
-The core of the structure is taken from https://github.com/choojs/choo and the
+The core of the structure is taken from https://github.com/choojs/choo,
 creation and rendering of HTML from
-https://github.com/WebReflection/lighterhtml
+https://github.com/WebReflection/lighterhtml and stateful component structure
+from https://github.com/bcomnes/lighterhui
