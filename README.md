@@ -11,3 +11,7 @@ resulting in them adding extra features (increasing complexity and size).
 
 This project is a mix of code taken from many of my favorite dependencies to
 create something that's fun to use and small enough to understand.
+
+The core of the structure is taken from https://github.com/choojs/choo and the
+creation and rendering of HTML from
+https://github.com/WebReflection/lighterhtml
