@@ -3,10 +3,19 @@ import AppView from './views/AppView.js'
 import MessageBus from './lib/MessageBus.js'
 import Router from './lib/Router.js'
 import store from './stores/store.js'
+import cache from './lib/cache.js'
 
 const bus = new MessageBus()
 const router = new Router()
 const state = {}
+
+// TODO Add description
+const emit = function (...args) {
+  bus.emit.apply(bus, args)
+}
+
+// TODO add description
+const components = cache(state, emit)
 
 // When calling a handler for a route (views) we send in the application state
 // and a function which can be used to emit events. We don't send in the entire
@@ -15,7 +24,7 @@ const state = {}
 function addRoute (route, handler) {
   router.on(route, function (params) {
     state.params = params
-    return handler(state, function (...args) {
+    return handler(components, state, function (...args) {
       bus.emit.apply(bus, args)
     })
   })

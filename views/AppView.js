@@ -1,10 +1,18 @@
-import LoadingView from './LoadingView.js'
-import ListView from './ListView.js'
+import { html } from 'https://unpkg.com/lighterhtml?module'
+import MapView from './MapView.js'
 
-function AppView (state, emit) {
-  if (state.items === undefined) return LoadingView()
-  const list = new ListView(state, emit)
-  return list.element
+function AppView (components, state, emit) {
+  const map = components(MapView, 'map')
+  return html`
+    <main>
+      ${map.element}
+      <ul>
+        ${state.places.map(place => {
+          return html`<li>${place.text}</li>`
+        })}
+      </ul>
+    </main>
+  `
 }
 
 export default AppView
