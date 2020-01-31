@@ -17,6 +17,7 @@ class MapView extends Component {
   }
 
   onload () {
+    if (this.map) return
     console.log('Map is added to DOM')
     this.map = L.map('mapid').setView([56.052302150217, 14.588513374328615], 13)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
