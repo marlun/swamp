@@ -9,13 +9,14 @@ const bus = new MessageBus()
 const router = new Router()
 const state = {}
 
-// TODO Add description
-const emit = function (...args) {
+// From time to time there will arise a need to have an element in an
+// application hold a self-contained state. This is common when using 3rd party
+// libraries to e.g. display an interactive map or a graph and you rely on this
+// 3rd party library to handle modifications to the DOM. (from
+// github.com/choojs/choo documentation)
+const components = cache(state, function (...args) {
   bus.emit.apply(bus, args)
-}
-
-// TODO add description
-const components = cache(state, emit)
+})
 
 // When calling a handler for a route (views) we send in the application state
 // and a function which can be used to emit events. We don't send in the entire

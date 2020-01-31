@@ -9,7 +9,6 @@ class MapView {
     this.onMapClick = this.onMapClick.bind(this)
     this.onconnected = this.onconnected.bind(this)
     this.ondisconnected = this.ondisconnected.bind(this)
-    this.onattributechanged = this.onattributechanged.bind(this)
   }
 
   render () {
@@ -17,7 +16,6 @@ class MapView {
       <div
         onconnected=${this.onconnected}
         ondisconnected=${this.ondisconnected}
-        onattributechanged=${this.onattributechanged}
         id="mapid">
       </div>
     `
@@ -42,10 +40,6 @@ class MapView {
 
   ondisconnected () {
     console.log('Map is removed from DOM')
-  }
-
-  onattributechanged (...args) {
-    console.log('attribute changed', args)
   }
 
   onMapClick (e) {
