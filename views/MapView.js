@@ -1,24 +1,31 @@
-import Component from '../lib/Component.js'
 import * as L from 'https://unpkg.com/leaflet@1.5.1/dist/leaflet-src.esm.js'
+import { html } from 'https://unpkg.com/lighterhtml-plus?module'
 
-class MapView extends Component {
+class MapView {
   constructor (components, state, emit) {
-    super()
     this.components = components
     this.state = state
     this.emit = emit
     this.onMapClick = this.onMapClick.bind(this)
+    this.onconnected = this.onconnected.bind(this)
+    this.ondisconnected = this.ondisconnected.bind(this)
+    this.onattributechanged = this.onattributechanged.bind(this)
   }
 
-  createElement () {
-    return this.html`
-      <div id="mapid"></div>
+  render () {
+    return html`
+      <div
+        onconnected=${this.onconnected}
+        ondisconnected=${this.ondisconnected}
+        onattributechanged=${this.onattributechanged}
+        id="mapid">
+      </div>
     `
   }
 
-  onload () {
-    if (this.map) return
+  onconnected () {
     console.log('Map is added to DOM')
+    if (this.map) return
     this.map = L.map('mapid').setView([56.052302150217, 14.588513374328615], 13)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
@@ -33,8 +40,12 @@ class MapView extends Component {
     })
   }
 
-  onunload () {
+  ondisconnected () {
     console.log('Map is removed from DOM')
+  }
+
+  onattributechanged (...args) {
+    console.log('attribute changed', args)
   }
 
   onMapClick (e) {
