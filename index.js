@@ -1,4 +1,4 @@
-import { html, render } from 'https://unpkg.com/lighterhtml?module'
+import { render } from 'https://unpkg.com/lighterhtml-plus?module'
 import AppView from './views/AppView.js'
 import MessageBus from './lib/MessageBus.js'
 import Router from './lib/Router.js'
@@ -33,8 +33,7 @@ function addRoute (route, handler) {
 // We listen for 'render' events and re-render the application, morphing from
 // the DOM tree created from the last state into the the new.
 bus.on('render', function () {
-  const result = router.emit(window.location.pathname)
-  render(document.body, () => html`${result}`)
+  render(document.body, router.emit(window.location.pathname))
 })
 
 // Initialize all our stores which conatins all our business logic and handles
